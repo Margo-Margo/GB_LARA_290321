@@ -1,30 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 04.04.2021
- * Time: 0:27
- */
+
 
 namespace App\Http\Controllers;
 
 
+use App\Models\News;
+use Illuminate\Support\Facades\View;
+
 class NewsController extends Controller
 {
-public function index(){
-    echo "this is main news page";
-    exit;
-}
-public function card($id){
-    echo "this is news card {$id}";
-    exit;
-}
-public function category($category){
-    echo "this is category {$category}";
-    exit;
-}
-public function categoryNews($category){
-    echo "this is news from category {$category}";
-    exit;
-}
+    private $categories = [
+        1 => 'Здоровье',
+        2 => 'ИТ',
+        3 => 'Спорт'
+    ];
+
+    public function index()
+    {
+        return view('news.index', ['categories' => $this->categories]);
+    }
+
+    public function list($categoryId)
+    {
+        $news = (new News())->getByCategoryId($categoryId);
+        return view('news.list', ['news' => $news]);
+    }
+
+    public function card($id)
+    {
+        $news = $this->news[$id];
+        echo $news['title'];
+        exit;
+    }
+
 }

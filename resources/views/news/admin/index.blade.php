@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    Главная
+    Главная админки
 @endsection
 
 @section('content')

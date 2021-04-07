@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
-use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\AdminNewsController;
 
 
 Route::get('/', function () {
@@ -47,4 +47,11 @@ Route::group([
         ->name('update');
     Route::get('/delete',[AdminNewsController::class, 'delete'])
         ->name('delete');
+    Route::get('/card/{id}',[AdminNewsController::class, 'card'])
+        ->where('id', '[0-9]+')
+        ->name('card');
+    Route::get('/{categoryId}', [AdminNewsController::class, 'list'])
+        ->where('id', '[0-9]+')
+        ->name('list');
+
 });

@@ -31,5 +31,23 @@ class AdminNewsController extends AdminController
         return view('news.admin.card', ['news' => $card]);
     }
 
+    public function create()
+    {
+        return response(view('admin.news.create'));
+    }
 
+    public function save()
+    {
+        return redirect()->route('admin::news::create');
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
 }

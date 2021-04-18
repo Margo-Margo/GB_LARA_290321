@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
+use \App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\AdminNewsController;
 
 
@@ -27,9 +28,21 @@ Route::group([
     Route::get('/{categoryId}', [NewsController::class, 'list'])
         ->where('id', '[0-9]+')
         ->name('list');
+
 });
 
+/**  Отзывы */
 
+Route::group([
+    'prefix' => 'feedback',
+    'as' => 'feedback::'
+], function() {
+    Route::get('/create',[FeedbackController::class, 'create'])
+        ->name('create');
+    Route::post( '/save',[FeedbackController::class, 'save'])
+        ->name('save');
+
+});
 
 
 

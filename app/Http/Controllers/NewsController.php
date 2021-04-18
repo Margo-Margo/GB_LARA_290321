@@ -31,6 +31,4 @@ class NewsController extends Controller
         $card = (new News())->getById($id);
         return view('news.card', ['news' => $card]);
     }
-
-
 }

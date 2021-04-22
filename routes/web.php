@@ -70,3 +70,6 @@ Route::group([
         ->name('list');
 
 });
+
+
+Route::get('/db', [\App\Http\Controllers\DbController::class, 'index']);

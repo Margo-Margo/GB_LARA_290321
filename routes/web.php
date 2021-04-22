@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
+use \App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\AdminNewsController;
 
 
@@ -27,9 +28,21 @@ Route::group([
     Route::get('/{categoryId}', [NewsController::class, 'list'])
         ->where('id', '[0-9]+')
         ->name('list');
+
 });
 
+/**  Отзывы */
 
+Route::group([
+    'prefix' => 'feedback',
+    'as' => 'feedback::'
+], function() {
+    Route::get('/create',[FeedbackController::class, 'create'])
+        ->name('create');
+    Route::post( '/save',[FeedbackController::class, 'save'])
+        ->name('save');
+
+});
 
 
 
@@ -43,6 +56,8 @@ Route::group([
         ->name('index');
     Route::get('/create',[AdminNewsController::class, 'create'])
         ->name('create');
+    Route::post( '/save',[AdminNewsController::class, 'save'])
+        ->name('save');
     Route::get('/update',[AdminNewsController::class, 'update'])
         ->name('update');
     Route::get('/delete',[AdminNewsController::class, 'delete'])
@@ -55,3 +70,6 @@ Route::group([
         ->name('list');
 
 });
+
+
+Route::get('/db', [\App\Http\Controllers\DbController::class, 'index']);

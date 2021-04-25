@@ -4,7 +4,7 @@
 namespace App\Models;
 
 
-class News
+class News_old
 {
     private $news = [
         1 => [

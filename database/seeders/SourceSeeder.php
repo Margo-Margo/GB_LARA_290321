@@ -19,7 +19,7 @@ class SourceSeeder extends Seeder
     {
         $this->faker = $faker;
 
-        \DB::table('source')
+        \DB::table('sources')
             ->insert($this->generateData());
     }
 

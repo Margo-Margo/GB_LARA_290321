@@ -28,9 +28,41 @@ class NewsController extends Controller
     }
 
     public function card(News $news)
-    {
-      return view('news.card', ['model'=>$news]);
+    {  //dd($news->id);
+      return view('news.card', ['news'=>$news]);
        // $card = (new News_old())->getById($id);
        // return view('news.card', ['news' => $card]);
+    }
+
+    public function source(News $news, $sourceId)
+    {
+       // dd($sourceId);
+        return view('news.source', ['news' => $news->getBySourceId($sourceId)]);
+    }
+
+    public function create()
+    {
+        return response(view('admin.news.create'));
+    }
+
+    public function save()
+    {
+        $news =[
+            'title'=>$_GET('news[title]'),
+            'description'=>$_GET('news[description]'),
+            'source'=>$_GET('news[source]'),
+            'publish_date'=>$_GET('news[publish_date]'),
+            'category_id'=>$_GET('news[category_id]'),
+            'created_at'=>date('Y-m-d'),
+            'updated_at'=>date('Y-m-d'),
+            'deleted_at'=>date('Y-m-d'),
+        ];
+
+
+        $model = new News();
+        $model->fill($news);
+        $model->save();
+
+       return redirect()->route('news::create');
     }
 }

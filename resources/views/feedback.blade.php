@@ -21,7 +21,7 @@
                 {!! Form::textarea('feedback[content]','', ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::submit("send", ['class' => "btn btn-success"]) !!}
+                {!! Form::submit("send", ['class' => "btn btn-block btn-success "]) !!}
             </div>
             {!! Form::close() !!}
         </div>

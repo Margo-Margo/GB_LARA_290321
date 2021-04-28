@@ -29,6 +29,17 @@ Route::group([
         ->where('id', '[0-9]+')
         ->name('list');
 
+    Route::get('/source/{sourceId}', [NewsController::class, 'source'])
+        ->where('id', '[0-9]+')
+        ->name('source');
+
+    Route::any('/create/create', [NewsController::class, 'create'])
+        ->name('create');
+
+
+    Route::post('/create/save', [NewsController::class, 'save'])
+        ->name('save');
+
 });
 
 /**  Отзывы */

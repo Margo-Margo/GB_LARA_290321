@@ -2,20 +2,24 @@
 
 @section('title')
     @parent
-    Все новости
+    Карточка новости
 @endsection
 @section('content')
 
     @php
-        $url = route('news::card', 'id')
+        $url = route('news::card', [$news->id])
     @endphp
-    @forelse ($news as $item)
-    <div>
-        {{$item['content']}}
-    @empty
-            <p>Нет новостей</p>
-    @endforelse
+    @if ($news)
+    <div class="card-header-pills">
+      <h3>  {{$news['title']}}</h3>
     </div>
+    <div class="card-body">
+         {{$news['description']}}
+    </div>
+    @endif
+<div class="mt-3">
+    <a style="width: 150px;" class="btn btn-outline-info" href="{{ url()->previous() }}">Вернуться</a>
+</div>
 
 
 @endsection

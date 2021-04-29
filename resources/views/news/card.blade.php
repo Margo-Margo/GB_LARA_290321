@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    Карточка новости
+    {{ __('labels.news_card') }}
 @endsection
 @section('content')
 
@@ -18,7 +18,7 @@
     </div>
     @endif
 <div class="mt-3">
-    <a style="width: 150px;" class="btn btn-outline-info" href="{{ url()->previous() }}">Вернуться</a>
+    <a style="width: 150px;" class="btn btn-outline-info" href="{{ url()->previous() }}">{{ __('labels.go_back') }}</a>
 </div>
 
 

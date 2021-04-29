@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    Новости по источникам
+    {{ __('labels.news_source') }}
 @endsection
 
 @section('content')
@@ -15,6 +15,6 @@
                 <a href="{{$url}}">{{$item->title}}</a>
         </div>
     @empty
-        Новостей нет
+        {{ __('labels.no_news') }}
     @endforelse
 @endsection

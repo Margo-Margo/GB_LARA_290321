@@ -1,0 +1,33 @@
+<?php
+return [
+    'admin_categories'  => 'Admin categories',
+    'news_title'        => 'Title',
+    'create_category'   => 'Create category',
+    'create_news'       => 'Create news',
+    'admin_news'        => 'Admin news',
+    'change'            => 'Change',
+    'delete'            => 'Delete',
+    'description'       => 'Description',
+    'feedback'          => 'Feedback',
+    'go_back'           => 'Go back',
+    'locale'            => 'Ru-En',
+    'main'              => 'Main',
+    'name'              => 'Name',
+    'new_category'      => 'New category',
+    'news'              => 'News',
+    'news_card'         => 'News card',
+    'news_source'       => 'News source',
+    'news_list'         => 'News list',
+    'no_categories'     => 'No categories',
+    'no_news'           => 'No news',
+    'source'            => 'Source',
+    'title'             => 'Title',
+    'categories'        => 'Categories',
+    'category'          => 'Category',
+    'page'              => 'Page',
+    'published'         => 'Published',
+    'publish_date'      => 'Publish date',
+    'save'              => 'Save',
+
+
+];

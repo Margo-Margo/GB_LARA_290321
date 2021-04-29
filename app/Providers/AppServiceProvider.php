@@ -26,17 +26,20 @@ class AppServiceProvider extends ServiceProvider
     {
         $menu = [
             [
-                'title' => 'Новости',
+                'title' =>  __('labels.news'),
                 'alias' => 'news::categories'
             ],
             [
-                'title' => 'Отзывы',
+                'title' => __('labels.feedback'),
                 'alias' => 'feedback::create'
             ],
-            [
-                'title' => 'Админка',
+            [  'title' => __('labels.admin_news'),
                 'alias' => 'admin::news::index'
             ],
+            [ 'title' => __('labels.admin_categories'),
+                'alias' => 'admin::news::indexCategory'
+            ],
+
         ];
 
         View::share('menu', $menu);

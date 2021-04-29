@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
 use \App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\Admin\AdminNewsController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 
 Route::get('/', function () {
@@ -32,14 +32,6 @@ Route::group([
     Route::get('/source/{sourceId}', [NewsController::class, 'source'])
         ->where('id', '[0-9]+')
         ->name('source');
-
-    Route::any('/create/create', [NewsController::class, 'create'])
-        ->name('create');
-
-
-    Route::post('/create/save', [NewsController::class, 'save'])
-        ->name('save');
-
 });
 
 /**  Отзывы */
@@ -69,16 +61,26 @@ Route::group([
         ->name('create');
     Route::post( '/save',[AdminNewsController::class, 'save'])
         ->name('save');
-    Route::get('/update',[AdminNewsController::class, 'update'])
+    Route::get('/update/{id}',[AdminNewsController::class, 'update'])
+        ->where('id', '[0-9]+')
         ->name('update');
-    Route::get('/delete',[AdminNewsController::class, 'delete'])
+    Route::get('/delete/{id}',[AdminNewsController::class, 'delete'])
+        ->where('id', '[0-9]+')
         ->name('delete');
-    Route::get('/card/{id}',[AdminNewsController::class, 'card'])
+
+    /** Админка категорий */
+    Route::get('/category', [AdminNewsController::class, 'indexCategory'] )
+        ->name('indexCategory');
+    Route::get('/category/create',[AdminNewsController::class, 'createCategory'])
+        ->name('createCategory');
+    Route::post( '/category/save',[AdminNewsController::class, 'saveCategory'])
+        ->name('saveCategory');
+    Route::get('/category/update/{id}',[AdminNewsController::class, 'updateCategory'])
         ->where('id', '[0-9]+')
-        ->name('card');
-    Route::get('/{categoryId}', [AdminNewsController::class, 'list'])
+        ->name('updateCategory');
+    Route::get('/category/delete/{id}',[AdminNewsController::class, 'deleteCategory'])
         ->where('id', '[0-9]+')
-        ->name('list');
+        ->name('deleteCategory');
 
 });
 

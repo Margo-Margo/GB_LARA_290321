@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <title>@section('title') Страница @show</title>
+    <title>@section('title') {{ __('labels.page') }} @show</title>
 </head>
 <body>
-<div style="position: relative; z-index: 1; height: 100vh;">
+<div style="position: relative; z-index: 100; height: 100vh;">
 <div class="header">
     @include('blocks.menu')
 </div>
@@ -18,7 +18,7 @@
     @yield('content')
 </div>
 </div>
-<div class="footer container">
+<div class="footer container" style="position: relative; z-index: 1;">
     This is footer
 </div>
 </body>

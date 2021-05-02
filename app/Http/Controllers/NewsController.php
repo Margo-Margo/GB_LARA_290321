@@ -4,8 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Category;
 use App\Models\News;
-
+use Session;
 
 class NewsController extends Controller
 {
@@ -17,9 +18,8 @@ class NewsController extends Controller
 
     public function index()
     {
-       // $result = News::all();
-
-        return view('news.index', ['categories' => $this->categories]);
+        $result = Category::all();
+        return view('news.index', ['categories' =>$result]);
     }
 
     public function list(News $news, $categoryId)
@@ -40,29 +40,4 @@ class NewsController extends Controller
         return view('news.source', ['news' => $news->getBySourceId($sourceId)]);
     }
 
-    public function create()
-    {
-        return response(view('admin.news.create'));
-    }
-
-    public function save()
-    {
-        $news =[
-            'title'=>$_GET('news[title]'),
-            'description'=>$_GET('news[description]'),
-            'source'=>$_GET('news[source]'),
-            'publish_date'=>$_GET('news[publish_date]'),
-            'category_id'=>$_GET('news[category_id]'),
-            'created_at'=>date('Y-m-d'),
-            'updated_at'=>date('Y-m-d'),
-            'deleted_at'=>date('Y-m-d'),
-        ];
-
-
-        $model = new News();
-        $model->fill($news);
-        $model->save();
-
-       return redirect()->route('news::create');
-    }
 }

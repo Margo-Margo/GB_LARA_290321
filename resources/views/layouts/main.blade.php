@@ -14,7 +14,7 @@
 <div class="header">
     @include('blocks.menu')
 </div>
-<div class="content container">
+<div class="content container mt-5">
     @yield('content')
 </div>
 </div>

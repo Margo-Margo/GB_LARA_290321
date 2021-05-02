@@ -10,11 +10,7 @@ use Session;
 
 class NewsController extends Controller
 {
-    private $categories = [
-        1 => 'Здоровье',
-        2 => 'ИТ',
-        3 => 'Спорт'
-    ];
+
 
     public function index()
     {

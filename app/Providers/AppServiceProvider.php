@@ -22,26 +22,51 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+   /* public function boot()
     {
         $menu = [
             [
-                'title' =>  __('labels.news'),
+                'title' => __('menu.main'),
+                'alias' => 'home'
+            ],
+            [
+                'title' => __('menu.news'),
                 'alias' => 'news::categories'
             ],
             [
-                'title' => __('labels.feedback'),
+                'title' => __('menu.feedback'),
                 'alias' => 'feedback::create'
-            ],
-            [  'title' => __('labels.admin_news'),
-                'alias' => 'admin::news::index'
-            ],
-            [ 'title' => __('labels.admin_categories'),
-                'alias' => 'admin::news::indexCategory'
             ],
 
         ];
 
         View::share('menu', $menu);
+    }
+       */
+
+        public function boot()
+    {
+        view()->composer('*', function ($view) {
+
+            $menu = [
+                [
+                    'title' => __('menu.main'),
+                    'alias' => 'home'
+                ],
+                [
+                    'title' => __('menu.news'),
+                    'alias' => 'news::categories'
+                ],
+                [
+                    'title' => __('menu.feedback'),
+                    'alias' => 'feedback::create'
+                ],
+
+            ];
+
+
+            return $view->with('menu', $menu);
+
+        });
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ __('labels.admin_profile') }}
+    {{ __('labels.admin_profile_create') }}
 @endsection
 
 @section('content')
@@ -22,26 +22,30 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <form action="{{route('admin::profile::update')}}" method="post">
+            <form action="{{route('admin::profile::save')}}" method="post">
                 @csrf
                 <div class="form-group">
-                    <label>{{ __('labels.name_user') }}</label>
-                    <input class="form-control" type="text" name="name"
-                           value="{{$user->name ?? old('name')}}">
+                    <label for="name">{{ __('labels.name_user') }}</label>
+                    <input id="name" class="form-control" type="text" name="name" value="{{ old('name') }}">
                 </div>
                 <div class="form-group">
-                    <label>{{ __('labels.email') }}</label>
-                    <input class="form-control" type="email" name="email"
-                           value="{{$user->email ?? old('email')}}">
+                    <label  for="email">{{ __('labels.email') }}</label>
+                    <input class="form-control" id="email" type="email" name="email" value="{{ old('email') }}">
                 </div>
                 <div class="form-group">
-                    <label>{{ __('labels.new_pass') }}</label>
-                    <input class="form-control" type="password" name="password">
+                    <label for="is_admin">{{ __('labels.is_admin') }}</label>
+                    <select class="form-control"  id="is_admin"  name="is_admin">
+                        <option selected value="0">{{__('labels.not_admin')}}</option>
+                        <option value="1">{{__('labels.is_admin')}}</option>
+                    </select>
+
+
                 </div>
                 <div class="form-group">
-                    <label>{{ __('labels.password') }}</label>
-                    <input class="form-control" type="password" name="current_password">
+                    <label for="password">{{ __('labels.new_pass') }}</label>
+                    <input class="form-control"id="password" type="password" name="password">
                 </div>
+
                 <div class="form-group">
                     <input class="btn btn-success" type="submit" value="{{ __('labels.save') }}">
                 </div>

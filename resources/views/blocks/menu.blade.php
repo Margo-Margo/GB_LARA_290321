@@ -74,6 +74,9 @@
                                 <a class="dropdown-item" href="{{route('admin::profile::create')}}">
                                     {{ __('menu.profile_create') }}
                                 </a>
+                                <a class="dropdown-item" href="{{route('admin::parser')}}">
+                                    Parser
+                                </a>
                             </div>
                         </li>
                     @endif

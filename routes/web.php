@@ -181,6 +181,8 @@ Route::group([
     //Parser
     Route::get("parser", [ParserController::class, 'index'])
         ->name('parser');
+    Route::get("parser/create", [ParserController::class, 'create'])
+        ->name('create');
 });
 
 

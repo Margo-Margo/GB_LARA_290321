@@ -3,26 +3,45 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\NewsParsingJob;
 use App\Models\News;
+use App\Services\NewsParser;
 use Illuminate\Http\Request;
 
 class ParserController extends Controller
 {
     public function index()
     {
-        $xml = \XmlParser::load('https://tsvetusajadacha.webnode.cz/rss/sad-ogorod.xml');
-        $data = $xml->parse([
-            'channel_title' => ['uses' => 'channel.title'],
-            'items' => ['uses' => 'channel.item[title,description,pubDate]']
-        ]);
+        $sources = [
+            'https://news.yandex.ru/auto.rss',
+            'https://news.yandex.ru/auto_racing.rss',
+            'https://news.yandex.ru/gadgets.rss',
+            'https://news.yandex.ru/index.rss',
+            'https://news.yandex.ru/martial_arts.rss',
+            'https://news.yandex.ru/communal.rss',
+            'https://news.yandex.ru/health.rss',
+            'https://news.yandex.ru/games.rss',
+            'https://news.yandex.ru/internet.rss',
+            'https://news.yandex.ru/cyber_sport.rss',
+            'https://news.yandex.ru/movies.rss',
+            'https://news.yandex.ru/cosmos.rss',
+            'https://news.yandex.ru/culture.rss',
+            'https://news.yandex.ru/championsleague.rss',
+            'https://news.yandex.ru/music.rss',
+            'https://news.yandex.ru/nhl.rss',
+        ];
 
-        return ($data);
+        foreach ($sources as $source) {
+            NewsParsingJob::dispatch($source);
+        }
+
     }
 
     public function create()
     {
-        $data= $this->index();
-        $parceNews = [];
+       $data = NewsParser::run($this->source);
+
+       $parceNews = [];
         foreach ($data['items'] as $item) {
             $model = new News();
             $model->title = $item['title'];
@@ -34,7 +53,7 @@ class ParserController extends Controller
 
         }
 
-       // return $parceNews;
+        // return $parceNews;
         dd($parceNews);
     }
 

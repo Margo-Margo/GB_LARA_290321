@@ -6,6 +6,9 @@ use \App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\LocaleController;
 use \App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ParserController;
+use App\Http\Controllers\SocialController;
+
 
 
 Route::get('/', function () {
@@ -178,12 +181,28 @@ Route::group([
     //Parser
     Route::get("parser", [ParserController::class, 'index'])
         ->name('parser');
+    Route::get("parser/create", [ParserController::class, 'create'])
+        ->name('create');
 });
 
 
 
 
 Route::get('/db', [\App\Http\Controllers\DbController::class, 'index']);
+
+Route::group([
+    'prefix' => 'social',
+    'as' => 'social::',
+], function () {
+    Route::get('/vk/login', [SocialController::class, 'loginVk'])
+        ->name('login-vk');
+    Route::get('/vk/response', [SocialController::class, 'responseVk'])
+        ->name('response-vk');
+    Route::get('/github/login', [SocialController::class, 'loginGitHub'])
+        ->name('login-github');
+    Route::get('/github/response', [SocialController::class, 'responseGitHub'])
+        ->name('response-github');
+});
 
 
 Route::get('/locale/{lang}', [LocaleController::class, 'index'])
@@ -195,3 +214,12 @@ Route::get('/locale/{lang}', [LocaleController::class, 'index'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/clear', function() {
+    Artisan::call('optimize');
+    Artisan::call('cache:clear');
+    Artisan::call('route:cache');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    return "Выгнал кэш!";
+});
